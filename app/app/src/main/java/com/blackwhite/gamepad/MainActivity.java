@@ -1,12 +1,14 @@
 package com.blackwhite.gamepad;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.blackwhite.gamepad.controller.GamePadController;
 
@@ -18,6 +20,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         up = findViewById(R.id.up);
@@ -51,11 +56,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             keyRelease(v);
             return true;
         }
+        v.performClick();
         return false;
     }
 
     private void keyPress(View v) {
         Log.d("EVENT", "Key pressed");
+        setAnimation(v);
         switch (v.getId()){
             case R.id.up:
                 controller.keyPressed("up");
@@ -84,8 +91,21 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
     }
 
+    private void setAnimation(View v) {
+        v.setAlpha(0.5f);
+        v.setScaleX(0.9f);
+        v.setScaleY(0.9f);
+    }
+
+    private void resetAnimation(View v){
+        v.setAlpha(1);
+        v.setScaleX(1f);
+        v.setScaleY(1f);
+    }
+
     private void keyRelease(View v) {
         Log.d("EVENT", "Key released");
+        resetAnimation(v);
         switch (v.getId()){
             case R.id.up:
                 controller.keyReleased("up");
