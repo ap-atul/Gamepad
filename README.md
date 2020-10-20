@@ -4,6 +4,10 @@ server on the machine with the game, once connected start the game and play.
 
 Change the ```keymap.txt``` file to configure keys as per the game
 
+## Screen
+
+![screen](https://github.com/AP-Atul/Gamepad/blob/master/screens/1.png)
+
 ## Description
 1. app : folder contains the android app which connects the python server running on the machine with 
 the ip address 
