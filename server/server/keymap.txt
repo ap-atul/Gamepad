@@ -1,0 +1,8 @@
+up=w
+down=s
+right=d
+left=a
+square=space
+triangle=f
+circle=f
+cross=shift
